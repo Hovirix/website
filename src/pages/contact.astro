@@ -1,0 +1,149 @@
+---
+import { Button } from "../components/ui/button.tsx";
+import { Input } from "../components/ui/input.tsx";
+import { Label } from "../components/ui/label.tsx";
+import { Textarea } from "../components/ui/textarea.tsx";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Contact">
+  <div class="mx-auto max-w-6xl">
+
+    <!-- Header -->
+    <div class="animate-fade-up border-b px-8 py-16">
+      <span class="mb-4 block font-mono text-xs tracking-[0.25em] text-primary uppercase">
+        — Let's talk
+      </span>
+      <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+        Contact
+      </h1>
+      <p class="mt-4 max-w-sm text-sm leading-[1.9] text-muted-foreground">
+        Have a project in mind or just want to say hello? I'll get back to you within a day or two.
+      </p>
+    </div>
+
+    <!-- Grid: form + info -->
+    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto]">
+
+      <!-- Form -->
+      <div class="animate-fade-up delay-200 px-8 py-12 md:border-r md:py-16">
+        <form method="POST" action="#" class="flex flex-col gap-8" novalidate>
+
+          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div class="flex flex-col gap-2">
+              <Label for="name" class="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
+                Name
+              </Label>
+              <Input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your name"
+                required
+                autocomplete="name"
+                class="border-border bg-transparent font-mono text-sm placeholder:text-muted-foreground/40 focus-visible:ring-primary"
+              />
+            </div>
+            <div class="flex flex-col gap-2">
+              <Label for="email" class="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
+                Email
+              </Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                required
+                autocomplete="email"
+                class="border-border bg-transparent font-mono text-sm placeholder:text-muted-foreground/40 focus-visible:ring-primary"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <Label for="subject" class="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
+              Subject
+            </Label>
+            <Input
+              id="subject"
+              name="subject"
+              type="text"
+              placeholder="What's this about?"
+              required
+              class="border-border bg-transparent font-mono text-sm placeholder:text-muted-foreground/40 focus-visible:ring-primary"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <Label for="message" class="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
+              Message
+            </Label>
+            <Textarea
+              id="message"
+              name="message"
+              placeholder="Tell me about your project, idea, or question..."
+              rows={7}
+              required
+              class="resize-none border-border bg-transparent font-mono text-sm placeholder:text-muted-foreground/40 focus-visible:ring-primary"
+            />
+          </div>
+
+          <div class="flex items-center gap-4">
+            <button
+              type="submit"
+              class="inline-flex h-10 items-center gap-3 border border-primary bg-primary px-6 font-mono text-xs tracking-widest uppercase text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              Send message
+              <span class="opacity-60">→</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Info sidebar -->
+      <div class="animate-fade-up delay-300 flex flex-col gap-0 md:w-64">
+
+        <div class="border-b px-8 py-8">
+          <p class="mb-2 font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">Email</p>
+          <a
+            href="mailto:hello@hovirix.dev"
+            class="font-mono text-sm text-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
+          >
+            hello@hovirix.dev
+          </a>
+        </div>
+
+        <div class="border-b px-8 py-8">
+          <p class="mb-2 font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">GitHub</p>
+          <a
+            href="https://github.com/hovirix"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-mono text-sm text-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
+          >
+            github.com/hovirix
+          </a>
+        </div>
+
+        <div class="border-b px-8 py-8">
+          <p class="mb-2 font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">Location</p>
+          <p class="font-mono text-sm text-foreground">Remote · EU timezone</p>
+        </div>
+
+        <div class="px-8 py-8">
+          <p class="mb-3 font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">Availability</p>
+          <div class="flex items-center gap-2.5">
+            <span class="relative flex h-2 w-2">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-50"></span>
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
+            </span>
+            <p class="font-mono text-sm text-foreground">Open to work</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</Layout>

@@ -1,0 +1,156 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const projects = [
+	{
+		title: "Homelab Orchestration Platform",
+		description:
+			"A self-hosted Kubernetes cluster managing 12 services across 3 nodes — Grafana, Gitea, Vaultwarden, and more. Automated with Ansible and Flux CD.",
+		tags: ["Kubernetes", "Ansible", "Flux CD"],
+		category: "Infrastructure",
+		image:
+			"https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80",
+		href: "#",
+		year: "2024",
+	},
+	{
+		title: "Network Segmentation Dashboard",
+		description:
+			"VLAN-aware network monitoring UI built on top of pfSense and ntopng. Real-time traffic heatmaps and per-host anomaly detection.",
+		tags: ["pfSense", "Vue 3", "ntopng"],
+		category: "Cybersecurity",
+		image:
+			"https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1200&q=80",
+		href: "#",
+		year: "2024",
+	},
+	{
+		title: "Obsidian Productivity System",
+		description:
+			"A public vault template combining Zettelkasten, GTD, and deep-work time-blocking. Used by 400+ people on GitHub.",
+		tags: ["Obsidian", "Markdown", "PKM"],
+		category: "Productivity",
+		image:
+			"https://images.unsplash.com/photo-1512314889357-e157c22f938d?w=1200&q=80",
+		href: "#",
+		year: "2023",
+	},
+	{
+		title: "shadcn Design System Preset",
+		description:
+			"A zero-radius, dark-first shadcn preset with Raleway typography and OKLCH color tokens. Drop-in for any Astro or Next.js project.",
+		tags: ["shadcn/ui", "Tailwind", "Astro"],
+		category: "Design",
+		image:
+			"https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1200&q=80",
+		href: "#",
+		year: "2025",
+	},
+	{
+		title: "Self-Hosted Auth Gateway",
+		description:
+			"Authelia-powered SSO sitting in front of 20+ internal services. Supports TOTP, WebAuthn, and per-app access rules via LDAP.",
+		tags: ["Authelia", "NGINX", "LDAP"],
+		category: "Infrastructure",
+		image:
+			"https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&q=80",
+		href: "#",
+		year: "2023",
+	},
+];
+---
+
+<Layout title="Portfolio">
+  <div class="mx-auto max-w-6xl">
+
+    <!-- Header -->
+    <div class="animate-fade-up border-b px-8 py-16">
+      <div class="flex items-end justify-between">
+        <div>
+          <span class="mb-4 block font-mono text-xs tracking-[0.25em] text-primary uppercase">
+            — Selected work
+          </span>
+          <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            Portfolio
+          </h1>
+        </div>
+        <span class="hidden font-mono text-xs text-muted-foreground sm:block">
+          {projects.length} projects
+        </span>
+      </div>
+    </div>
+
+    <!-- Project list — editorial table style -->
+    <div class="border-b">
+      {projects.map((project, i) => (
+        <a
+          href={project.href}
+          class="animate-fade-up group relative flex flex-col border-b last:border-b-0 no-underline transition-colors hover:bg-muted/30 md:flex-row md:items-stretch"
+          style={`animation-delay: ${(i + 1) * 80}ms`}
+        >
+          <!-- Index + meta column -->
+          <div class="flex items-start gap-6 px-8 py-6 md:w-64 md:flex-col md:justify-between md:border-r md:py-8">
+            <div class="flex items-center gap-4">
+              <span class="font-mono text-xs text-muted-foreground">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span class="font-mono text-xs tracking-widest text-primary uppercase">
+                {project.category}
+              </span>
+            </div>
+            <span class="font-mono text-xs text-muted-foreground md:mt-auto">
+              {project.year}
+            </span>
+          </div>
+
+          <!-- Main content -->
+          <div class="flex flex-1 flex-col justify-center gap-3 px-8 py-6 md:py-10">
+            <div class="flex items-start justify-between gap-4">
+              <h2 class="text-lg font-semibold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary">
+                {project.title}
+              </h2>
+              <span class="mt-1 shrink-0 font-mono text-xs text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
+                →
+              </span>
+            </div>
+            <p class="max-w-xl text-sm leading-relaxed text-muted-foreground">
+              {project.description}
+            </p>
+            <div class="flex flex-wrap gap-2 pt-1">
+              {project.tags.map((tag) => (
+                <span class="font-mono text-[11px] tracking-wider text-muted-foreground uppercase border border-border px-2 py-0.5">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Image column — hidden on mobile, appears on hover on desktop -->
+          <div class="hidden w-48 shrink-0 overflow-hidden md:block">
+            <img
+              src={project.image}
+              alt={project.title}
+              class="h-full w-full object-cover opacity-0 transition-all duration-500 group-hover:opacity-60 group-hover:scale-105"
+            />
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="animate-fade-up delay-500 flex flex-col items-start gap-4 px-8 py-16 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p class="font-mono text-xs tracking-widest text-muted-foreground uppercase">Next step</p>
+        <p class="mt-1 text-lg font-semibold text-foreground">Interested in working together?</p>
+      </div>
+      <a
+        href="/contact"
+        class="inline-flex h-10 items-center gap-3 border border-primary bg-primary px-6 font-mono text-xs tracking-widest uppercase text-primary-foreground transition-colors hover:bg-primary/90"
+      >
+        Get in touch
+        <span class="opacity-60">→</span>
+      </a>
+    </div>
+
+  </div>
+</Layout>
