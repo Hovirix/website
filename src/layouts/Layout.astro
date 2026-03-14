@@ -1,0 +1,34 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.tsx";
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "hovirix — developer & designer" } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title} · hovirix</title>
+  </head>
+  <body class="min-h-screen antialiased">
+    <!-- Fixed vertical lines -->
+    <div class="pointer-events-none fixed inset-0 z-[100]" aria-hidden="true">
+      <div class="relative mx-auto h-full max-w-6xl">
+        <span class="absolute inset-y-0 left-0 w-px bg-border opacity-70"></span>
+        <span class="absolute inset-y-0 right-0 w-px bg-border opacity-70"></span>
+      </div>
+    </div>
+    <Navbar currentPath={currentPath} client:load />
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

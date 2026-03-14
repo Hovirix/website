@@ -1,0 +1,34 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Button } from "../components/ui/button.tsx";
+---
+
+<Layout title="Home">
+  <section class="relative z-10 flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-6 text-center">
+    <div class="max-w-3xl">
+
+      <p class="mb-6 text-xs tracking-[0.3em] text-muted-foreground uppercase">
+        Available for work · 2026
+      </p>
+
+      <h1 class="mb-6 text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-7xl">
+        Building things<br />
+        <span class="text-muted-foreground">that matter.</span>
+      </h1>
+
+      <p class="mx-auto max-w-md text-sm leading-relaxed text-muted-foreground">
+        Developer & designer crafting sharp interfaces and clean systems.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <Button asChild>
+          <a href="/portfolio">View work</a>
+        </Button>
+        <Button asChild variant="outline">
+          <a href="/contact">Get in touch</a>
+        </Button>
+      </div>
+
+    </div>
+  </section>
+</Layout>

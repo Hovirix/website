@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import BlogGrid from "../../components/BlogGrid.tsx";
+
+const allPosts = (await getCollection("blog"))
+	.filter((p) => !p.data.draft)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const [featured, ...rest] = allPosts;
+
+// Serialize dates to strings for React
+const toPost = (p: (typeof allPosts)[number]) => ({
+	id: p.id,
+	title: p.data.title,
+	description: p.data.description,
+	pubDate: p.data.pubDate.toISOString(),
+	category: p.data.category,
+	image: p.data.image,
+});
+---
+
+<Layout title="Blog">
+  <section class="mx-auto max-w-6xl">
+    <!-- Page header -->
+    <!-- <div class="border-b px-6 py-10"> -->
+      <!-- <h1 class="text-3xl font-bold tracking-tight text-foreground">Blog</h1> -->
+    <!-- </div> -->
+
+    <BlogGrid
+      featured={toPost(featured)}
+      posts={rest.map(toPost)}
+      client:load
+    />
+  </section>
+</Layout>
