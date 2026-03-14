@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
 import BlogGrid from "../../components/BlogGrid.tsx";
+import Layout from "../../layouts/Layout.astro";
 
 const allPosts = (await getCollection("blog"))
 	.filter((p) => !p.data.draft)
@@ -9,7 +9,6 @@ const allPosts = (await getCollection("blog"))
 
 const [featured, ...rest] = allPosts;
 
-// Serialize dates to strings for React
 const toPost = (p: (typeof allPosts)[number]) => ({
 	id: p.id,
 	title: p.data.title,
@@ -21,16 +20,29 @@ const toPost = (p: (typeof allPosts)[number]) => ({
 ---
 
 <Layout title="Blog">
-  <section class="mx-auto max-w-6xl">
-    <!-- Page header -->
-    <!-- <div class="border-b px-6 py-10"> -->
-      <!-- <h1 class="text-3xl font-bold tracking-tight text-foreground">Blog</h1> -->
-    <!-- </div> -->
+  <div class="mx-auto max-w-6xl">
+
+    <!-- Header -->
+    <div class="animate-fade-up border-b px-8 py-16">
+      <div class="flex items-end justify-between">
+        <div>
+          <span class="mb-4 block font-mono text-xs tracking-[0.25em] text-primary uppercase">
+            — Writing
+          </span>
+          <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            Blog
+          </h1>
+        </div>
+        <span class="hidden font-mono text-xs text-muted-foreground sm:block">
+          {allPosts.length} posts
+        </span>
+      </div>
+    </div>
 
     <BlogGrid
       featured={toPost(featured)}
       posts={rest.map(toPost)}
       client:load
     />
-  </section>
+  </div>
 </Layout>
