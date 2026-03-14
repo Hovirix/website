@@ -11,24 +11,54 @@ const { title, description = "hovirix — developer & designer" } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
 
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <title>{title} · hovirix</title>
+    <!-- Anti-flash: apply dark class before first paint -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          if (stored === "light") {
+            document.documentElement.classList.remove("dark");
+          } else {
+            // default to dark
+            document.documentElement.classList.add("dark");
+          }
+        } catch (_) {}
+      })();
+    </script>
   </head>
-  <body class="min-h-screen antialiased">
-    <!-- Fixed vertical lines -->
+  <body class="noise min-h-screen antialiased">
+
+    <!-- Fixed vertical layout lines -->
     <div class="pointer-events-none fixed inset-0 z-[100]" aria-hidden="true">
       <div class="relative mx-auto h-full max-w-6xl">
-        <span class="absolute inset-y-0 left-0 w-px bg-border opacity-70"></span>
-        <span class="absolute inset-y-0 right-0 w-px bg-border opacity-70"></span>
+        <span class="absolute inset-y-0 left-0 w-px bg-border opacity-60"></span>
+        <span class="absolute inset-y-0 right-0 w-px bg-border opacity-60"></span>
       </div>
     </div>
+
     <Navbar currentPath={currentPath} client:load />
+
     <main>
       <slot />
     </main>
+
+    <!-- Footer -->
+    <footer class="mx-auto max-w-6xl border-t px-8 py-8">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p class="font-mono text-xs tracking-widest text-muted-foreground">
+          hovirix · {new Date().getFullYear()}
+        </p>
+        <p class="font-mono text-xs text-muted-foreground">
+          built with astro + shadcn
+        </p>
+      </div>
+    </footer>
+
   </body>
 </html>

@@ -1,4 +1,4 @@
-import { MenuIcon, XIcon } from "lucide-react";
+import { MenuIcon, MoonIcon, SunIcon, XIcon } from "lucide-react";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,7 +8,6 @@ import {
 	NavigationMenuList,
 	navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Separator } from "@/components/ui/separator";
 import {
 	Sheet,
 	SheetContent,
@@ -21,19 +20,8 @@ const links = [
 	{ label: "Home", href: "/" },
 	{ label: "Portfolio", href: "/portfolio" },
 	{ label: "Blog", href: "/blog" },
+	{ label: "Contact", href: "/contact" },
 ];
-
-function Logo() {
-	return (
-		<a
-			href="/"
-			className="flex items-center gap-2.5 font-semibold tracking-tight text-foreground no-underline"
-			aria-label="Hovirix home"
-		>
-			hovirix
-		</a>
-	);
-}
 
 interface NavbarProps {
 	currentPath: string;
@@ -41,37 +29,80 @@ interface NavbarProps {
 
 export default function Navbar({ currentPath }: NavbarProps) {
 	const [open, setOpen] = React.useState(false);
+	const [dark, setDark] = React.useState(true);
+
+	React.useEffect(() => {
+		setDark(document.documentElement.classList.contains("dark"));
+	}, []);
+
+	const toggleDark = () => {
+		const next = !dark;
+		setDark(next);
+		document.documentElement.classList.toggle("dark", next);
+		try {
+			localStorage.setItem("theme", next ? "dark" : "light");
+		} catch (_) {}
+	};
 
 	const isActive = (href: string) =>
 		href === "/" ? currentPath === "/" : currentPath.startsWith(href);
 
 	return (
-		<header className="sticky top-0 z-50 w-full border-t border-b bg-background/85 backdrop-blur-md">
-			<div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-				<Logo />
+		<header className="sticky top-0 z-50 w-full border-b bg-background/90 backdrop-blur-sm">
+			<div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-8">
+				{/* Logo — monospaced, amber accent on bracket */}
+				<a
+					href="/"
+					className="flex items-center gap-0 font-mono text-sm font-medium tracking-tight text-foreground no-underline"
+					aria-label="Hovirix home"
+				>
+					<span className="text-primary">[</span>
+					<span>hovirix</span>
+					<span className="text-primary">]</span>
+				</a>
 
-				{/* Desktop Navigation */}
-				<NavigationMenu className="hidden md:flex">
-					<NavigationMenuList>
-						{links.map(({ label, href }) => (
-							<NavigationMenuItem key={href}>
-								<NavigationMenuLink
-									href={href}
-									className={navigationMenuTriggerStyle()}
-									data-active={isActive(href) ? "" : undefined}
-								>
-									{label}
-								</NavigationMenuLink>
-							</NavigationMenuItem>
-						))}
-					</NavigationMenuList>
-				</NavigationMenu>
+				{/* Desktop nav — right side */}
+				<div className="hidden md:flex items-center gap-1">
+					{links.map(({ label, href }) => (
+						<a
+							key={href}
+							href={href}
+							className={cn(
+								"relative px-3 py-1.5 font-mono text-xs tracking-widest uppercase transition-colors",
+								isActive(href)
+									? "text-primary"
+									: "text-muted-foreground hover:text-foreground",
+							)}
+						>
+							{isActive(href) && (
+								<span className="absolute bottom-0 left-3 right-3 h-px bg-primary" />
+							)}
+							{label}
+						</a>
+					))}
 
-				{/* Right: CTA + Mobile toggle */}
-				<div className="flex items-center gap-3">
-					<Button asChild variant="outline" className="hidden md:inline-flex">
-						<a href="/contact">Contact</a>
-					</Button>
+					<div className="mx-3 h-4 w-px bg-border" />
+
+					<button
+						type="button"
+						aria-label="Toggle dark mode"
+						onClick={toggleDark}
+						className="flex h-8 w-8 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+					>
+						{dark ? <SunIcon size={14} /> : <MoonIcon size={14} />}
+					</button>
+				</div>
+
+				{/* Mobile */}
+				<div className="flex items-center gap-2 md:hidden">
+					<button
+						type="button"
+						aria-label="Toggle dark mode"
+						onClick={toggleDark}
+						className="flex h-8 w-8 items-center justify-center text-muted-foreground"
+					>
+						{dark ? <SunIcon size={14} /> : <MoonIcon size={14} />}
+					</button>
 
 					<Sheet open={open} onOpenChange={setOpen}>
 						<SheetTrigger asChild>
@@ -79,36 +110,31 @@ export default function Navbar({ currentPath }: NavbarProps) {
 								variant="ghost"
 								size="icon"
 								aria-label="Toggle menu"
-								className="md:hidden"
+								className="h-8 w-8"
 							>
-								{open ? <XIcon data-icon /> : <MenuIcon data-icon />}
+								{open ? <XIcon size={16} /> : <MenuIcon size={16} />}
 							</Button>
 						</SheetTrigger>
-						<SheetContent side="right" className="w-72">
+						<SheetContent side="right" className="w-64 border-l bg-background">
 							<SheetTitle className="sr-only">Navigation menu</SheetTitle>
-							<div className="flex h-full flex-col gap-6 pt-6">
-								<Logo />
-								<Separator />
-								<nav className="flex flex-col gap-1">
-									{links.map(({ label, href }) => (
-										<a
-											key={href}
-											href={href}
-											className={cn(
-												"rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
-												isActive(href)
-													? "bg-accent text-accent-foreground"
-													: "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-											)}
-										>
-											{label}
-										</a>
-									))}
-								</nav>
-								<Separator />
-								<Button asChild variant="outline" className="w-full">
-									<a href="/contact">Contact</a>
-								</Button>
+							<div className="flex flex-col gap-1 pt-12">
+								<p className="mb-4 px-4 font-mono text-xs tracking-[0.2em] text-muted-foreground uppercase">
+									Navigation
+								</p>
+								{links.map(({ label, href }) => (
+									<a
+										key={href}
+										href={href}
+										className={cn(
+											"flex items-center gap-3 px-4 py-3 font-mono text-xs tracking-widest uppercase transition-colors",
+											isActive(href)
+												? "text-primary border-l-2 border-primary pl-[calc(1rem-2px)]"
+												: "text-muted-foreground hover:text-foreground",
+										)}
+									>
+										{label}
+									</a>
+								))}
 							</div>
 						</SheetContent>
 					</Sheet>
