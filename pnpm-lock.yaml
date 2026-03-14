@@ -14,6 +14,9 @@ importers:
       '@fontsource-variable/raleway':
         specifier: ^5.2.8
         version: 5.2.8
+      '@fontsource/dm-mono':
+        specifier: ^5.2.7
+        version: 5.2.7
       '@tailwindcss/vite':
         specifier: ^4.2.1
         version: 4.2.1(vite@7.3.1(jiti@2.6.1)(lightningcss@1.31.1))
@@ -427,6 +430,9 @@ packages:
 
   '@fontsource-variable/raleway@5.2.8':
     resolution: {integrity: sha512-PahqGI7bkz4a80m91Jt65DRsuFQmRip5vGDbI9sChVSKjLrdDfXbeGIwnTPi/ZVCOoQrbLnqzBOLQpLohnz+WA==}
+
+  '@fontsource/dm-mono@5.2.7':
+    resolution: {integrity: sha512-Ma1az2atTVgQWuOWwjuxx26p/6A6CU9HBNKq1CFV6YKpKhpswnf9ry9Ql4+T6bTZzkdtSfS6tjJvqZOljVzIFQ==}
 
   '@hono/node-server@1.19.11':
     resolution: {integrity: sha512-dr8/3zEaB+p0D2n/IUrlPF1HZm586qgJNXK1a9fhg/PzdtkK7Ksd5l312tJX2yBuALqDYBlG20QEbayqPyxn+g==}
@@ -4176,6 +4182,8 @@ snapshots:
   '@floating-ui/utils@0.2.11': {}
 
   '@fontsource-variable/raleway@5.2.8': {}
+
+  '@fontsource/dm-mono@5.2.7': {}
 
   '@hono/node-server@1.19.11(hono@4.12.7)':
     dependencies:
