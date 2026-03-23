@@ -1,0 +1,21 @@
+---
+interface Props {
+	path: string;
+	meta?: string;
+}
+
+const { path, meta } = Astro.props;
+---
+
+<div class="animate-fade-in flex items-center justify-between border-b px-8 py-3">
+  <span class="font-mono text-[11px] tracking-[0.22em] text-muted-foreground uppercase">
+    {path}
+  </span>
+  <slot name="meta">
+    {meta && (
+      <span class="font-mono text-[11px] text-muted-foreground tabular-nums">
+        {meta}
+      </span>
+    )}
+  </slot>
+</div>

@@ -1,5 +1,6 @@
 ---
 draft: false
+featured: true
 title: "Building a Home Server from Scratch"
 description: "How I turned an old PC into a full-featured home lab running Proxmox, with self-hosted services including Nextcloud, Gitea, and a reverse proxy."
 image:

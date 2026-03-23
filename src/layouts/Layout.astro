@@ -1,14 +1,28 @@
 ---
 import "../styles/global.css";
+import Footer from "@/components/Footer.astro";
 import Navbar from "../components/Navbar.tsx";
+import {
+	SITE_DESCRIPTION,
+	SITE_NAME,
+	SITE_TITLE_SUFFIX,
+	SITE_URL,
+} from "@/lib/site";
 
 interface Props {
 	title: string;
 	description?: string;
+	image?: string;
 }
 
-const { title, description = "hovirix — developer & designer" } = Astro.props;
+const {
+	title,
+	description = SITE_DESCRIPTION,
+	image = "/og-default.svg",
+} = Astro.props;
 const currentPath = Astro.url.pathname;
+const canonicalUrl = new URL(currentPath, SITE_URL).toString();
+const ogImage = new URL(image, SITE_URL).toString();
 ---
 
 <html lang="en" class="dark">
@@ -16,8 +30,27 @@ const currentPath = Astro.url.pathname;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <title>{title} · hovirix</title>
-    <!-- Anti-flash: apply dark class before first paint -->
+    <meta name="author" content={SITE_NAME} />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={`${title} ${SITE_TITLE_SUFFIX}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} ${SITE_TITLE_SUFFIX}`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <title>{title} {SITE_TITLE_SUFFIX}</title>
+
     <script is:inline>
       (function () {
         try {
@@ -25,40 +58,29 @@ const currentPath = Astro.url.pathname;
           if (stored === "light") {
             document.documentElement.classList.remove("dark");
           } else {
-            // default to dark
             document.documentElement.classList.add("dark");
           }
         } catch (_) {}
       })();
     </script>
   </head>
-  <body class="noise min-h-screen antialiased">
+  <body class="noise scanlines min-h-screen antialiased">
 
-    <!-- Fixed vertical layout lines -->
+    <!-- Fixed vertical rails -->
     <div class="pointer-events-none fixed inset-0 z-[100]" aria-hidden="true">
       <div class="relative mx-auto h-full max-w-6xl">
-        <span class="absolute inset-y-0 left-0 w-px bg-border opacity-60"></span>
-        <span class="absolute inset-y-0 right-0 w-px bg-border opacity-60"></span>
+        <span class="absolute inset-y-0 left-0 w-px bg-border opacity-50"></span>
+        <span class="absolute inset-y-0 right-0 w-px bg-border opacity-50"></span>
       </div>
     </div>
 
-    <Navbar currentPath={currentPath} client:load />
+    <Navbar currentPath={currentPath} client:idle />
 
     <main>
       <slot />
     </main>
 
-    <!-- Footer -->
-    <footer class="mx-auto max-w-6xl border-t px-8 py-8">
-      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p class="font-mono text-xs tracking-widest text-muted-foreground">
-          hovirix · {new Date().getFullYear()}
-        </p>
-        <p class="font-mono text-xs text-muted-foreground">
-          built with astro + shadcn
-        </p>
-      </div>
-    </footer>
+    <Footer />
 
   </body>
 </html>

@@ -1,0 +1,17 @@
+---
+import SystemBar from "@/components/SystemBar.astro";
+
+interface Props {
+	path: string;
+	meta?: string;
+}
+
+const { path, meta } = Astro.props;
+---
+
+<div class="mx-auto max-w-6xl">
+  <SystemBar path={path} meta={meta}>
+    <slot name="meta" slot="meta" />
+  </SystemBar>
+  <slot />
+</div>

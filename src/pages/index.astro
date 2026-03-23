@@ -1,94 +1,16 @@
 ---
-import { Button } from "../components/ui/button.tsx";
 import Layout from "../layouts/Layout.astro";
+import PageShell from "@/components/PageShell.astro";
+import HomeHero from "@/components/sections/home/HomeHero.astro";
+import HomeStats from "@/components/sections/home/HomeStats.astro";
 ---
 
 <Layout title="Home">
-  <section class="relative mx-auto max-w-6xl min-h-[calc(100svh-3.5rem)] flex flex-col justify-center px-8 py-24 overflow-hidden">
+  <PageShell path="sys://hovirix.dev" meta="2026">
+    <section class="relative min-h-[calc(100svh-3rem)] flex flex-col overflow-hidden">
+      <HomeHero />
+      <HomeStats />
 
-    <!-- Background ruled lines (decorative) -->
-    <div class="pointer-events-none absolute inset-0 flex flex-col justify-between opacity-[0.04]" aria-hidden="true">
-      {Array.from({ length: 14 }).map((_, i) => (
-        <span class="w-full h-px bg-foreground" />
-      ))}
-    </div>
-
-    <!-- Large ghost number -->
-    <div
-      class="animate-fade-in delay-100 pointer-events-none absolute right-8 top-1/2 -translate-y-1/2 select-none font-mono text-[22vw] font-bold leading-none text-foreground opacity-[0.03] sm:text-[18vw]"
-      aria-hidden="true"
-    >
-      01
-    </div>
-
-    <!-- Content -->
-    <div class="relative max-w-2xl">
-
-      <!-- Eyebrow -->
-      <div class="animate-fade-up delay-100 mb-8 flex items-center gap-4">
-        <span class="h-px w-8 bg-primary"></span>
-        <span class="font-mono text-xs tracking-[0.25em] text-primary uppercase">
-          Available for work · 2026
-        </span>
-      </div>
-
-      <!-- Headline -->
-      <h1 class="animate-fade-up delay-200 mb-6 text-5xl font-bold leading-[1.04] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-        Building systems<br />
-        <em class="not-italic text-muted-foreground">that hold.</em>
-      </h1>
-
-      <!-- Sub -->
-      <p class="animate-fade-up delay-300 mb-10 max-w-sm text-sm leading-[1.9] text-muted-foreground">
-        Developer & designer focused on infrastructure, security, and
-        interfaces that last longer than trends.
-      </p>
-
-      <!-- CTAs -->
-      <div class="animate-fade-up delay-400 flex flex-wrap items-center gap-4">
-        <a
-          href="/portfolio"
-          class="inline-flex h-10 items-center gap-3 border border-primary bg-primary px-6 font-mono text-xs tracking-widest uppercase text-primary-foreground transition-colors hover:bg-primary/90"
-        >
-          View work
-          <span class="opacity-60">→</span>
-        </a>
-        <a
-          href="/blog"
-          class="inline-flex h-10 items-center gap-3 border border-border px-6 font-mono text-xs tracking-widest uppercase text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
-        >
-          Read blog
-        </a>
-      </div>
-
-    </div>
-
-    <!-- Bottom stat strip -->
-    <div class="animate-fade-up delay-600 absolute bottom-12 left-8 right-8 flex items-end justify-between">
-      <div class="flex items-center gap-8">
-        <div class="flex flex-col gap-1">
-          <span class="font-mono text-2xl font-bold text-foreground">5+</span>
-          <span class="font-mono text-xs tracking-widest text-muted-foreground uppercase">Years</span>
-        </div>
-        <div class="h-8 w-px bg-border"></div>
-        <div class="flex flex-col gap-1">
-          <span class="font-mono text-2xl font-bold text-foreground">20+</span>
-          <span class="font-mono text-xs tracking-widest text-muted-foreground uppercase">Projects</span>
-        </div>
-        <div class="h-8 w-px bg-border"></div>
-        <div class="flex flex-col gap-1">
-          <span class="font-mono text-2xl font-bold text-primary">●</span>
-          <span class="font-mono text-xs tracking-widest text-muted-foreground uppercase">Open</span>
-        </div>
-      </div>
-
-      <a
-        href="/contact"
-        class="hidden font-mono text-xs tracking-widest text-muted-foreground uppercase underline-offset-4 hover:text-foreground hover:underline sm:block"
-      >
-        Get in touch
-      </a>
-    </div>
-
-  </section>
+    </section>
+  </PageShell>
 </Layout>

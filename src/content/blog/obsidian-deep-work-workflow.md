@@ -5,7 +5,7 @@ description: "How I use Obsidian, daily notes, and a weekly review system to sta
 image:
   src: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80"
   alt: "Clean desk with notebook and laptop"
-pubDate: 2026-02-28
+pubDate: 2026-02-01
 category: productivity
 tags: ["obsidian", "pkm", "deep-work", "notes"]
 ---

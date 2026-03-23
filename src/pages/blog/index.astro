@@ -1,48 +1,35 @@
 ---
-import { getCollection } from "astro:content";
 import BlogGrid from "../../components/BlogGrid.tsx";
+import PageHeader from "@/components/PageHeader.astro";
+import PageShell from "@/components/PageShell.astro";
 import Layout from "../../layouts/Layout.astro";
+import { getPublishedBlogPosts } from "@/lib/content-queries";
+import { toBlogCardViewModel } from "@/lib/view-models";
 
-const allPosts = (await getCollection("blog"))
-	.filter((p) => !p.data.draft)
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const allPosts = await getPublishedBlogPosts();
 
-const [featured, ...rest] = allPosts;
+// Use explicitly flagged featured post, fall back to most recent.
+const featured = allPosts.find((p) => p.data.featured) ?? allPosts[0];
+const rest = featured ? allPosts.filter((p) => p.id !== featured.id) : [];
 
-const toPost = (p: (typeof allPosts)[number]) => ({
-	id: p.id,
-	title: p.data.title,
-	description: p.data.description,
-	pubDate: p.data.pubDate.toISOString(),
-	category: p.data.category,
-	image: p.data.image,
-});
 ---
 
 <Layout title="Blog">
-  <div class="mx-auto max-w-6xl">
+  <PageShell path="sys://hovirix.dev/blog" meta={`${allPosts.length} posts`}>
+    <PageHeader title="Writing" asideText="Homelab · Security / Productivity · Systems" />
 
-    <!-- Header -->
-    <div class="animate-fade-up border-b px-8 py-16">
-      <div class="flex items-end justify-between">
-        <div>
-          <span class="mb-4 block font-mono text-xs tracking-[0.25em] text-primary uppercase">
-            — Writing
-          </span>
-          <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Blog
-          </h1>
-        </div>
-        <span class="hidden font-mono text-xs text-muted-foreground sm:block">
-          {allPosts.length} posts
-        </span>
+    {featured ? (
+      <BlogGrid
+        featured={toBlogCardViewModel(featured)}
+        posts={rest.map(toBlogCardViewModel)}
+        client:visible
+      />
+    ) : (
+      <div class="border-b px-8 py-16 text-center">
+        <p class="font-mono text-[11px] tracking-widest text-muted-foreground uppercase">
+          No posts published yet
+        </p>
       </div>
-    </div>
-
-    <BlogGrid
-      featured={toPost(featured)}
-      posts={rest.map(toPost)}
-      client:load
-    />
-  </div>
+    )}
+  </PageShell>
 </Layout>
