@@ -32,7 +32,12 @@
   }
 
   body {
-    background-image: linear-gradient(180deg, rgb(19 19 20 / 100%) 0%, rgb(15 15 16 / 100%) 45%, rgb(19 19 20 / 100%) 100%);
+    background-image: linear-gradient(
+      180deg,
+      rgb(19 19 20 / 100%) 0%,
+      rgb(15 15 16 / 100%) 45%,
+      rgb(19 19 20 / 100%) 100%
+    );
   }
 
   body.mobile-nav-open {
@@ -71,10 +76,18 @@
   }
 
   .cta-machined {
-    background-image: linear-gradient(120deg, rgb(0 82 255 / 100%) 0%, rgb(0 76 237 / 100%) 100%);
+    background-image: linear-gradient(
+      120deg,
+      rgb(0 82 255 / 100%) 0%,
+      rgb(0 76 237 / 100%) 100%
+    );
   }
 
   .material-symbols-outlined {
-    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    font-variation-settings:
+      "FILL" 0,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 24;
   }
 }

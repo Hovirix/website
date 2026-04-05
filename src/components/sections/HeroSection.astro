@@ -13,16 +13,24 @@ const { description } = Astro.props;
   <header>
     <div class="mb-6 flex items-center gap-3">
       <span class="h-1.5 w-1.5 bg-primary"></span>
-      <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">
+      <span
+        class="font-mono text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60"
+      >
         WezTerm // 20240203-110809-5046fc22
       </span>
     </div>
 
-    <h1 class="mb-8 max-w-2xl text-5xl font-bold leading-[0.92] tracking-[-0.02em] text-on-surface sm:text-6xl md:text-7xl">
+    <h1
+      class="mb-8 max-w-2xl text-5xl font-bold leading-[0.92] tracking-[-0.02em] text-on-surface sm:text-6xl md:text-7xl"
+    >
       BUILDING AND SECURING <span class="text-primary">SYSTEMS</span>.
     </h1>
 
-    <p class="mb-10 max-w-2xl text-lg leading-relaxed text-on-surface-variant md:text-xl">{description}</p>
+    <p
+      class="mb-10 max-w-2xl text-lg leading-relaxed text-on-surface-variant md:text-xl"
+    >
+      {description}
+    </p>
 
     <div class="flex flex-wrap gap-4">
       <Button href="/projects" variant="primary">View Projects</Button>

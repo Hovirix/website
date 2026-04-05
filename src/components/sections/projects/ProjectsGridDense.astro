@@ -9,32 +9,46 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 border border-outline-variant/20 bg-outline-variant/20 md:grid-cols-2">
+<div
+  class="grid grid-cols-1 border border-outline-variant/20 bg-outline-variant/20 md:grid-cols-2"
+>
   {
     items.map((item) => {
       const projectSlug = item.id.replace(/\.(md|mdx)$/i, "");
       return (
-      <article
-        class="group bg-[#151516] p-8 transition-colors hover:bg-surface-container-high"
-        data-project-item
-        data-category={item.data.category.toLowerCase()}
-      >
-        <div class="mb-6 flex items-start justify-between">
-          <Icon name={item.data.icon} class="text-primary transition-transform group-hover:scale-110" />
-          <span class="font-mono text-[10px] text-on-surface-variant/50">{item.data.pubdate}</span>
-        </div>
-        <h3 class="mb-3 text-xl font-bold tracking-tight transition-colors group-hover:text-primary">
-          <a href={item.data.url ?? `/projects/${projectSlug}`} class="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-            {item.data.title}
-          </a>
-        </h3>
-        <p class="mb-6 text-sm leading-relaxed text-on-surface-variant">{item.data.description}</p>
-        <div class="mt-auto flex flex-wrap gap-2">
-          {(item.data.tags ?? []).slice(0, 2).map((tag) => (
-            <span class="bg-surface-container-highest px-2 py-0.5 font-mono text-[9px] text-on-surface-variant">{tag}</span>
-          ))}
-        </div>
-      </article>
+        <article
+          class="group bg-[#151516] p-8 transition-colors hover:bg-surface-container-high"
+          data-project-item
+          data-category={item.data.category.toLowerCase()}
+        >
+          <div class="mb-6 flex items-start justify-between">
+            <Icon
+              name={item.data.icon}
+              class="text-primary transition-transform group-hover:scale-110"
+            />
+            <span class="font-mono text-[10px] text-on-surface-variant/50">
+              {item.data.pubdate}
+            </span>
+          </div>
+          <h3 class="mb-3 text-xl font-bold tracking-tight transition-colors group-hover:text-primary">
+            <a
+              href={item.data.url ?? `/projects/${projectSlug}`}
+              class="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              {item.data.title}
+            </a>
+          </h3>
+          <p class="mb-6 text-sm leading-relaxed text-on-surface-variant">
+            {item.data.description}
+          </p>
+          <div class="mt-auto flex flex-wrap gap-2">
+            {(item.data.tags ?? []).slice(0, 2).map((tag) => (
+              <span class="bg-surface-container-highest px-2 py-0.5 font-mono text-[9px] text-on-surface-variant">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </article>
       );
     })
   }

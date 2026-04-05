@@ -14,31 +14,41 @@ const categories = [
 ];
 ---
 
-<div class="mb-12 flex items-center justify-between border-b border-outline-variant/20 pb-4">
+<div
+  class="mb-12 flex items-center justify-between border-b border-outline-variant/20 pb-4"
+>
   <nav class="flex gap-6 overflow-x-auto" data-filter-root="projects">
-    {categories.map((cat) => (
-      <button
-        data-filter-btn
-        data-category={cat.id}
-        aria-pressed={activeCategory === cat.id ? "true" : "false"}
-        class={`group relative px-1 py-2 font-mono text-[11px] uppercase tracking-[0.2em] transition-all duration-300 ${
-          activeCategory === cat.id
-            ? "text-primary"
-            : "text-on-surface-variant hover:text-on-surface"
-        }`}
-      >
-        <span class={`relative z-10 ${activeCategory === cat.id ? "text-primary" : ""}`}>
-          {cat.label}
-        </span>
-        <span
-          class={`absolute bottom-0 left-0 h-[2px] w-full bg-primary transition-transform duration-300 ${
-            activeCategory === cat.id ? "scale-x-100" : "scale-x-0 group-hover:scale-x-50"
+    {
+      categories.map((cat) => (
+        <button
+          data-filter-btn
+          data-category={cat.id}
+          aria-pressed={activeCategory === cat.id ? "true" : "false"}
+          class={`group relative px-1 py-2 font-mono text-[11px] uppercase tracking-[0.2em] transition-all duration-300 ${
+            activeCategory === cat.id
+              ? "text-primary"
+              : "text-on-surface-variant hover:text-on-surface"
           }`}
-        />
-      </button>
-    ))}
+        >
+          <span
+            class={`relative z-10 ${activeCategory === cat.id ? "text-primary" : ""}`}
+          >
+            {cat.label}
+          </span>
+          <span
+            class={`absolute bottom-0 left-0 h-[2px] w-full bg-primary transition-transform duration-300 ${
+              activeCategory === cat.id
+                ? "scale-x-100"
+                : "scale-x-0 group-hover:scale-x-50"
+            }`}
+          />
+        </button>
+      ))
+    }
   </nav>
-  <div class="hidden items-center gap-2 font-mono text-[11px] text-on-surface-variant md:flex">
+  <div
+    class="hidden items-center gap-2 font-mono text-[11px] text-on-surface-variant md:flex"
+  >
     <span>DISPLAY: {String(total).padStart(2, "0")}_NODES</span>
   </div>
 </div>
@@ -47,7 +57,9 @@ const categories = [
   const filterRoot = document.querySelector('[data-filter-root="projects"]');
 
   if (filterRoot instanceof HTMLElement) {
-    const buttons = Array.from(filterRoot.querySelectorAll("[data-filter-btn]"));
+    const buttons = Array.from(
+      filterRoot.querySelectorAll("[data-filter-btn]"),
+    );
     const items = Array.from(document.querySelectorAll("[data-project-item]"));
     const featured = document.querySelector("[data-featured-project]");
 
@@ -80,7 +92,8 @@ const categories = [
 
       if (featured instanceof HTMLElement) {
         const featuredCategory = featured.dataset.category;
-        const showFeatured = category === "all" || featuredCategory === category;
+        const showFeatured =
+          category === "all" || featuredCategory === category;
         featured.classList.toggle("hidden", !showFeatured);
       }
     };

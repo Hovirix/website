@@ -11,26 +11,48 @@ const projectSlug = project.id.replace(/\.(md|mdx)$/i, "");
 const projectHref = project.data.url ?? `/projects/${projectSlug}`;
 ---
 
-<section class="mb-16" data-featured-project data-category={project.data.category.toLowerCase()}>
-  <article class="ghost-border flex flex-col overflow-hidden bg-surface-container-low lg:flex-row">
+<section
+  class="mb-16"
+  data-featured-project
+  data-category={project.data.category.toLowerCase()}
+>
+  <article
+    class="ghost-border flex flex-col overflow-hidden bg-surface-container-low lg:flex-row"
+  >
     <div class="flex flex-1 flex-col justify-between p-8 md:p-12">
       <div>
         <div class="mb-6 flex items-center gap-3">
-          <span class="bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-primary">
+          <span
+            class="bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-primary"
+          >
             Featured Implementation
           </span>
-          <span class="font-mono text-[10px] text-on-surface-variant">{project.data.pubdate}</span>
+          <span class="font-mono text-[10px] text-on-surface-variant"
+            >{project.data.pubdate}</span
+          >
         </div>
-        <h2 class="mb-6 text-3xl font-bold tracking-tight md:text-4xl">{project.data.title}</h2>
-        <p class="mb-8 max-w-xl leading-relaxed text-on-surface-variant">{project.data.description}</p>
+        <h2 class="mb-6 text-3xl font-bold tracking-tight md:text-4xl">
+          {project.data.title}
+        </h2>
+        <p class="mb-8 max-w-xl leading-relaxed text-on-surface-variant">
+          {project.data.description}
+        </p>
         <div class="mb-10 flex flex-wrap gap-2">
-          {project.data.tags.map((item) => (
-            <span class="border border-outline-variant/30 px-2 py-1 font-mono text-[10px] text-on-surface-variant">{item}</span>
-          ))}
+          {
+            project.data.tags.map((item) => (
+              <span class="border border-outline-variant/30 px-2 py-1 font-mono text-[10px] text-on-surface-variant">
+                {item}
+              </span>
+            ))
+          }
         </div>
       </div>
       <div class="flex flex-wrap gap-4">
-        <Button href={projectHref} variant="primary" class="px-8 py-3 text-sm tracking-[0.14em]">View Project</Button>
+        <Button
+          href={projectHref}
+          variant="primary"
+          class="px-8 py-3 text-sm tracking-[0.14em]">View Project</Button
+        >
         <Button
           href="/projects"
           variant="ghost"
@@ -40,14 +62,19 @@ const projectHref = project.data.url ?? `/projects/${projectSlug}`;
         </Button>
       </div>
     </div>
-    <div class="relative h-64 flex-1 overflow-hidden bg-surface-container-highest lg:h-auto">
+    <div
+      class="relative h-64 flex-1 overflow-hidden bg-surface-container-highest lg:h-auto"
+    >
       <img
         src={project.data.image}
         alt={project.data.imageAlt}
         class="h-full w-full object-cover opacity-50 grayscale contrast-125"
         loading="lazy"
       />
-      <div class="absolute inset-0 hidden bg-gradient-to-l from-transparent to-surface-container-low lg:block"></div>
+      <div
+        class="absolute inset-0 hidden bg-gradient-to-l from-transparent to-surface-container-low lg:block"
+      >
+      </div>
     </div>
   </article>
 </section>

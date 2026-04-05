@@ -4,27 +4,35 @@ import TopNav from "../components/site/TopNav.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "Hovirix | Contact";
-const pageDescription = "Open to opportunities, collaborations, and technical inquiries. Secure communication available upon request.";
+const pageDescription =
+  "Open to opportunities, collaborations, and technical inquiries. Secure communication available upon request.";
 const heroTitle = pageTitle.replace("Hovirix | ", "").toUpperCase();
 ---
 
-<BaseLayout
-  title={pageTitle}
-  description={pageDescription}
->
+<BaseLayout title={pageTitle} description={pageDescription}>
   <TopNav currentPath={Astro.url.pathname} />
 
-  <main class="shell min-h-[calc(100vh-4rem)] w-full flex-grow py-16 pt-28 pb-28">
+  <main
+    class="shell min-h-[calc(100vh-4rem)] w-full flex-grow py-16 pt-28 pb-28"
+  >
     <header class="mb-25">
-      <h1 class="mb-4 text-5xl font-bold tracking-[-0.03em] md:text-7xl">{heroTitle}</h1>
-      <p class="max-w-6xl border-l-2 border-primary pl-6 text-lg leading-relaxed text-on-surface-variant">
+      <h1 class="mb-4 text-5xl font-bold tracking-[-0.03em] md:text-7xl">
+        {heroTitle}
+      </h1>
+      <p
+        class="max-w-6xl border-l-2 border-primary pl-6 text-lg leading-relaxed text-on-surface-variant"
+      >
         {pageDescription}
       </p>
     </header>
 
     <section class="max-w-3xl space-y-12 text-on-surface">
-        <div class="border-b border-outline-variant/20 pb-8">
-        <h2 class="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-on-surface-variant">MATRIX</h2>
+      <div class="border-b border-outline-variant/20 pb-8">
+        <h2
+          class="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-on-surface-variant"
+        >
+          MATRIX
+        </h2>
         <a
           href="https://matrix.to/#/@hovirix:matrix.org"
           target="_blank"
@@ -33,42 +41,67 @@ const heroTitle = pageTitle.replace("Hovirix | ", "").toUpperCase();
         >
           @hovirix:matrix.org
         </a>
-        <p class="text-base leading-relaxed text-on-surface-variant">Preferred for direct communication.</p>
-        </div>
+        <p class="text-base leading-relaxed text-on-surface-variant">
+          Preferred for direct communication.
+        </p>
+      </div>
 
-        <div class="border-b border-outline-variant/20 pb-8">
-          <h2 class="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-on-surface-variant">PGP / EMAIL</h2>
-          <a href="mailto:contact@hovirix.dev" class="inline-block text-xl text-on-surface transition-colors hover:text-primary">
-            contact@hovirix.dev
-          </a>
-          <p class="mt-2 font-mono text-xs tracking-[0.04em] text-on-surface-variant">Fingerprint: A1C9 7E4F 12D8 B53A 8C22 91F7 4D19 8C6B E0A2 F9D4</p>
-          <a
-            href="/pgp/hovirix-public-key.asc"
-            class="mt-4 inline-block font-mono text-xs uppercase tracking-[0.14em] text-primary transition-colors hover:text-primary-fixed"
-          >
-            Download public key ->
-          </a>
-        </div>
+      <div class="border-b border-outline-variant/20 pb-8">
+        <h2
+          class="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-on-surface-variant"
+        >
+          PGP / EMAIL
+        </h2>
+        <a
+          href="mailto:contact@hovirix.dev"
+          class="inline-block text-xl text-on-surface transition-colors hover:text-primary"
+        >
+          contact@hovirix.dev
+        </a>
+        <p
+          class="mt-2 font-mono text-xs tracking-[0.04em] text-on-surface-variant"
+        >
+          Fingerprint: A1C9 7E4F 12D8 B53A 8C22 91F7 4D19 8C6B E0A2 F9D4
+        </p>
+        <a
+          href="/pgp/hovirix-public-key.asc"
+          class="mt-4 inline-block font-mono text-xs uppercase tracking-[0.14em] text-primary transition-colors hover:text-primary-fixed"
+        >
+          Download public key ->
+        </a>
+      </div>
 
-        <div class="border-b border-outline-variant/20 pb-8">
-          <h2 class="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-on-surface-variant">GITHUB</h2>
-          <a
-            href="https://github.com/hovirix"
-            target="_blank"
-            rel="noreferrer"
-            class="inline-block text-xl text-on-surface transition-colors hover:text-primary"
-          >
-            github.com/hovirix
-          </a>
-        </div>
+      <div class="border-b border-outline-variant/20 pb-8">
+        <h2
+          class="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-on-surface-variant"
+        >
+          GITHUB
+        </h2>
+        <a
+          href="https://github.com/hovirix"
+          target="_blank"
+          rel="noreferrer"
+          class="inline-block text-xl text-on-surface transition-colors hover:text-primary"
+        >
+          github.com/hovirix
+        </a>
+      </div>
 
-        <div class="pb-4">
-          <h2 class="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-on-surface-variant">SECURITY & PRIVACY</h2>
-          <ul class="space-y-2 text-base leading-relaxed text-on-surface-variant">
-            <li>No tracking or analytics are deployed on communication endpoints.</li>
-            <li>PGP-encrypted communication is preferred for sensitive disclosures.</li>
-          </ul>
-        </div>
+      <div class="pb-4">
+        <h2
+          class="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-on-surface-variant"
+        >
+          SECURITY & PRIVACY
+        </h2>
+        <ul class="space-y-2 text-base leading-relaxed text-on-surface-variant">
+          <li>
+            No tracking or analytics are deployed on communication endpoints.
+          </li>
+          <li>
+            PGP-encrypted communication is preferred for sensitive disclosures.
+          </li>
+        </ul>
+      </div>
     </section>
   </main>
 

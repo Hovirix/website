@@ -9,9 +9,15 @@ interface Props {
 const { currentPath = "/" } = Astro.props;
 ---
 
-<nav class="fixed top-0 z-50 w-full border-b border-outline-variant/15 bg-background/95 backdrop-blur-sm">
+<nav
+  class="fixed top-0 z-50 w-full border-b border-outline-variant/15 bg-background/95 backdrop-blur-sm"
+>
   <div class="shell flex h-16 items-center justify-between">
-    <a href="/" class="font-headline text-lg font-bold tracking-tight text-on-surface">Hovirix</a>
+    <a
+      href="/"
+      class="font-headline text-lg font-bold tracking-tight text-on-surface"
+      >Hovirix</a
+    >
     <div class="flex items-center gap-3 md:gap-4">
       <div class="hidden items-center gap-5 md:flex">
         <NavLinks currentPath={currentPath} />
@@ -32,13 +38,19 @@ const { currentPath = "/" } = Astro.props;
         data-mobile-nav-toggle
       >
         <span class="sr-only">Menu</span>
-        <span class="material-symbols-outlined text-xl" data-mobile-nav-icon>menu</span>
+        <span class="material-symbols-outlined text-xl" data-mobile-nav-icon
+          >menu</span
+        >
       </button>
     </div>
   </div>
 </nav>
 
-<div class="fixed inset-0 top-16 z-30 hidden bg-background/70 md:hidden" data-mobile-nav-backdrop></div>
+<div
+  class="fixed inset-0 top-16 z-30 hidden bg-background/70 md:hidden"
+  data-mobile-nav-backdrop
+>
+</div>
 
 <div
   id="mobile-nav-panel"
@@ -63,7 +75,11 @@ const { currentPath = "/" } = Astro.props;
   const backdrop = document.querySelector("[data-mobile-nav-backdrop]");
   const icon = document.querySelector("[data-mobile-nav-icon]");
 
-  if (toggle instanceof HTMLButtonElement && panel instanceof HTMLElement && backdrop instanceof HTMLElement) {
+  if (
+    toggle instanceof HTMLButtonElement &&
+    panel instanceof HTMLElement &&
+    backdrop instanceof HTMLElement
+  ) {
     let isOpen = false;
 
     const sync = () => {

@@ -14,10 +14,16 @@ const pageDescription =
 
 const [projects, research] = await Promise.all([
   getCollection("projects"),
-  getCollection("research")
+  getCollection("research"),
 ]);
-projects.sort((a, b) => new Date(b.data.pubdate).getTime() - new Date(a.data.pubdate).getTime());
-research.sort((a, b) => new Date(b.data.pubdate).getTime() - new Date(a.data.pubdate).getTime());
+projects.sort(
+  (a, b) =>
+    new Date(b.data.pubdate).getTime() - new Date(a.data.pubdate).getTime(),
+);
+research.sort(
+  (a, b) =>
+    new Date(b.data.pubdate).getTime() - new Date(a.data.pubdate).getTime(),
+);
 const homepageProjects = projects.slice(0, 4);
 const homepageResearch = research.slice(0, 3);
 ---
@@ -31,7 +37,10 @@ const homepageResearch = research.slice(0, 3);
     <section class="mb-24">
       <div class="mb-8 flex items-end justify-between gap-6">
         <h2 class="text-4xl font-bold tracking-tight">Projects</h2>
-        <a href="/projects" class="font-mono text-xs uppercase tracking-[0.16em] text-primary transition-colors hover:text-primary/80">
+        <a
+          href="/projects"
+          class="font-mono text-xs uppercase tracking-[0.16em] text-primary transition-colors hover:text-primary/80"
+        >
           View all ->
         </a>
       </div>
@@ -41,95 +50,162 @@ const homepageResearch = research.slice(0, 3);
     <section class="mb-24">
       <div class="mb-8 flex items-end justify-between gap-6">
         <h2 class="text-4xl font-bold tracking-tight">Research</h2>
-        <a href="/research" class="font-mono text-xs uppercase tracking-[0.16em] text-primary transition-colors hover:text-primary/80">
+        <a
+          href="/research"
+          class="font-mono text-xs uppercase tracking-[0.16em] text-primary transition-colors hover:text-primary/80"
+        >
           View all ->
         </a>
       </div>
       <ResearchList items={homepageResearch} />
     </section>
 
-<section class="mb-24 grid items-start gap-16 md:grid-cols-2">
-  <article class="bg-surface-container p-10 ghost-border">
-    <div class="mb-10 flex items-center gap-4">
-      <span class="material-symbols-outlined text-3xl text-primary">settings_input_component</span>
-      <h2 class="text-3xl font-bold uppercase tracking-tight">Core Capabilities</h2>
-    </div>
+    <section class="mb-24 grid items-start gap-16 md:grid-cols-2">
+      <article class="bg-surface-container p-10 ghost-border">
+        <div class="mb-10 flex items-center gap-4">
+          <span class="material-symbols-outlined text-3xl text-primary"
+            >settings_input_component</span
+          >
+          <h2 class="text-3xl font-bold uppercase tracking-tight">
+            Core Capabilities
+          </h2>
+        </div>
 
-    <div class="grid gap-8">
-      <div class="border-l-2 border-primary/20 pl-6 transition-colors hover:border-primary/60">
-        <h3 class="mb-2 text-sm font-bold uppercase tracking-[0.12em]">Zero Trust Architecture</h3>
-        <p class="text-sm leading-relaxed text-on-surface-variant">
-          Identity-gated access, private service exposure, and policy enforcement across self-hosted infrastructure.
-        </p>
-      </div>
+        <div class="grid gap-8">
+          <div
+            class="border-l-2 border-primary/20 pl-6 transition-colors hover:border-primary/60"
+          >
+            <h3 class="mb-2 text-sm font-bold uppercase tracking-[0.12em]">
+              Zero Trust Architecture
+            </h3>
+            <p class="text-sm leading-relaxed text-on-surface-variant">
+              Identity-gated access, private service exposure, and policy
+              enforcement across self-hosted infrastructure.
+            </p>
+          </div>
 
-      <div class="border-l-2 border-primary/20 pl-6 transition-colors hover:border-primary/60">
-        <h3 class="mb-2 text-sm font-bold uppercase tracking-[0.12em]">Infrastructure Automation</h3>
-        <p class="text-sm leading-relaxed text-on-surface-variant">
-          Reproducible provisioning and configuration management with Terraform, Ansible, and version-controlled workflows.
-        </p>
-      </div>
+          <div
+            class="border-l-2 border-primary/20 pl-6 transition-colors hover:border-primary/60"
+          >
+            <h3 class="mb-2 text-sm font-bold uppercase tracking-[0.12em]">
+              Infrastructure Automation
+            </h3>
+            <p class="text-sm leading-relaxed text-on-surface-variant">
+              Reproducible provisioning and configuration management with
+              Terraform, Ansible, and version-controlled workflows.
+            </p>
+          </div>
 
-      <div class="border-l-2 border-primary/20 pl-6 transition-colors hover:border-primary/60">
-        <h3 class="mb-2 text-sm font-bold uppercase tracking-[0.12em]">Network Segmentation</h3>
-        <p class="text-sm leading-relaxed text-on-surface-variant">
-          VLAN-based isolation, deny-by-default firewalling, and reduced lateral movement across internal services.
-        </p>
-      </div>
+          <div
+            class="border-l-2 border-primary/20 pl-6 transition-colors hover:border-primary/60"
+          >
+            <h3 class="mb-2 text-sm font-bold uppercase tracking-[0.12em]">
+              Network Segmentation
+            </h3>
+            <p class="text-sm leading-relaxed text-on-surface-variant">
+              VLAN-based isolation, deny-by-default firewalling, and reduced
+              lateral movement across internal services.
+            </p>
+          </div>
 
-      <div class="border-l-2 border-primary/20 pl-6 transition-colors hover:border-primary/60">
-        <h3 class="mb-2 text-sm font-bold uppercase tracking-[0.12em]">Detection Engineering</h3>
-        <p class="text-sm leading-relaxed text-on-surface-variant">
-          Host and network telemetry pipelines with Wazuh, Suricata, and monitoring built for attack validation.
-        </p>
-      </div>
-    </div>
+          <div
+            class="border-l-2 border-primary/20 pl-6 transition-colors hover:border-primary/60"
+          >
+            <h3 class="mb-2 text-sm font-bold uppercase tracking-[0.12em]">
+              Detection Engineering
+            </h3>
+            <p class="text-sm leading-relaxed text-on-surface-variant">
+              Host and network telemetry pipelines with Wazuh, Suricata, and
+              monitoring built for attack validation.
+            </p>
+          </div>
+        </div>
 
-    <div class="mt-10 border-t border-outline-variant/20 pt-6">
-      <p class="font-mono text-[11px] leading-relaxed text-on-surface-variant/70">
-        <span class="font-bold uppercase text-primary">Stack:</span>
-        Proxmox, OpenWRT, Terraform, Ansible, Cloudflare Zero Trust, Wazuh, Suricata, Linux
-      </p>
-    </div>
-  </article>
+        <div class="mt-10 border-t border-outline-variant/20 pt-6">
+          <p
+            class="font-mono text-[11px] leading-relaxed text-on-surface-variant/70"
+          >
+            <span class="font-bold uppercase text-primary">Stack:</span>
+            Proxmox, OpenWRT, Terraform, Ansible, Cloudflare Zero Trust, Wazuh, Suricata,
+            Linux
+          </p>
+        </div>
+      </article>
 
       <article class="flex flex-col justify-start pt-10">
-    <div class="mb-8 flex items-center gap-4">
-      <span class="material-symbols-outlined text-3xl text-primary">biotech</span>
-      <h2 class="text-3xl font-bold uppercase tracking-tight">The Lab</h2>
-    </div>
+        <div class="mb-8 flex items-center gap-4">
+          <span class="material-symbols-outlined text-3xl text-primary"
+            >biotech</span
+          >
+          <h2 class="text-3xl font-bold uppercase tracking-tight">The Lab</h2>
+        </div>
 
-    <p class="mb-8 max-w-xl text-lg leading-relaxed text-on-surface-variant">
-      A self-hosted security engineering environment built on a multi-node Proxmox cluster, focused on validating zero-trust access, segmented networking, infrastructure automation, and detection pipelines under realistic attack scenarios.
-    </p>
+        <p
+          class="mb-8 max-w-xl text-lg leading-relaxed text-on-surface-variant"
+        >
+          A self-hosted security engineering environment built on a multi-node
+          Proxmox cluster, focused on validating zero-trust access, segmented
+          networking, infrastructure automation, and detection pipelines under
+          realistic attack scenarios.
+        </p>
 
-    <div class="mb-8 grid gap-4 sm:grid-cols-2">
-      <div class="bg-surface-container p-5 ghost-border">
-        <p class="mb-1 font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Access</p>
-        <p class="text-sm text-on-surface-variant">Cloudflare Access, Authentik OIDC, secure tunnels, no direct public exposure.</p>
-      </div>
+        <div class="mb-8 grid gap-4 sm:grid-cols-2">
+          <div class="bg-surface-container p-5 ghost-border">
+            <p
+              class="mb-1 font-mono text-[10px] uppercase tracking-[0.14em] text-primary"
+            >
+              Access
+            </p>
+            <p class="text-sm text-on-surface-variant">
+              Cloudflare Access, Authentik OIDC, secure tunnels, no direct
+              public exposure.
+            </p>
+          </div>
 
-      <div class="bg-surface-container p-5 ghost-border">
-        <p class="mb-1 font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Network</p>
-        <p class="text-sm text-on-surface-variant">Segmented VLANs, policy-driven firewalling, and controlled east-west traffic.</p>
-      </div>
+          <div class="bg-surface-container p-5 ghost-border">
+            <p
+              class="mb-1 font-mono text-[10px] uppercase tracking-[0.14em] text-primary"
+            >
+              Network
+            </p>
+            <p class="text-sm text-on-surface-variant">
+              Segmented VLANs, policy-driven firewalling, and controlled
+              east-west traffic.
+            </p>
+          </div>
 
-      <div class="bg-surface-container p-5 ghost-border">
-        <p class="mb-1 font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Automation</p>
-        <p class="text-sm text-on-surface-variant">Provisioning and configuration as code with reproducible deployment workflows.</p>
-      </div>
+          <div class="bg-surface-container p-5 ghost-border">
+            <p
+              class="mb-1 font-mono text-[10px] uppercase tracking-[0.14em] text-primary"
+            >
+              Automation
+            </p>
+            <p class="text-sm text-on-surface-variant">
+              Provisioning and configuration as code with reproducible
+              deployment workflows.
+            </p>
+          </div>
 
-      <div class="bg-surface-container p-5 ghost-border">
-        <p class="mb-1 font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Detection</p>
-        <p class="text-sm text-on-surface-variant">Telemetry, alerting, and attack-simulation-driven monitoring validation.</p>
-      </div>
-    </div>
+          <div class="bg-surface-container p-5 ghost-border">
+            <p
+              class="mb-1 font-mono text-[10px] uppercase tracking-[0.14em] text-primary"
+            >
+              Detection
+            </p>
+            <p class="text-sm text-on-surface-variant">
+              Telemetry, alerting, and attack-simulation-driven monitoring
+              validation.
+            </p>
+          </div>
+        </div>
 
-    <blockquote class="border-l-4 border-primary/40 bg-surface-container p-8 text-sm italic text-on-surface-variant/70 ghost-border">
-      “Built to secure, tested to fail, refined to hold.”
-    </blockquote>
-  </article>
-</section>
+        <blockquote
+          class="border-l-4 border-primary/40 bg-surface-container p-8 text-sm italic text-on-surface-variant/70 ghost-border"
+        >
+          “Built to secure, tested to fail, refined to hold.”
+        </blockquote>
+      </article>
+    </section>
 
     <ContactSection />
   </main>

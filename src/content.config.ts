@@ -14,8 +14,8 @@ const projects = defineCollection({
     featured: z.boolean().default(false),
     image: z.url(),
     imageAlt: z.string(),
-    icon: z.string()
-  })
+    icon: z.string(),
+  }),
 });
 
 const research = defineCollection({
@@ -23,12 +23,17 @@ const research = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    category: z.enum(["VULNERABILITY RESEARCH", "SYSTEMS", "CRYPTOGRAPHY", "NETWORK"]),
-    pubdate: z.string()
-  })
+    category: z.enum([
+      "VULNERABILITY RESEARCH",
+      "SYSTEMS",
+      "CRYPTOGRAPHY",
+      "NETWORK",
+    ]),
+    pubdate: z.string(),
+  }),
 });
 
 export const collections = {
   projects,
-  research
+  research,
 };
