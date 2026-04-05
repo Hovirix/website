@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import ResearchFilterBar from "../components/sections/research/ResearchFilterBar.astro";
+import ResearchList from "../components/sections/research/ResearchList.astro";
+import ResearchPageHero from "../components/sections/research/ResearchPageHero.astro";
+import ResearchLayout from "../layouts/ResearchLayout.astro";
+
+const pageTitle = "Hovirix | Research";
+const pageDescription = "Technical analyses, system investigations, and security-focused writeups.";
+const heroTitle = pageTitle.replace("Hovirix | ", "").toUpperCase();
+
+const researchItems = await getCollection("research");
+researchItems.sort((a, b) => new Date(b.data.pubdate).getTime() - new Date(a.data.pubdate).getTime());
+---
+
+<ResearchLayout
+  title={pageTitle}
+  description={pageDescription}
+>
+  <ResearchPageHero title={heroTitle} description={pageDescription} />
+  <ResearchFilterBar />
+  <ResearchList items={researchItems} />
+</ResearchLayout>

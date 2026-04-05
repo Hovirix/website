@@ -1,0 +1,54 @@
+---
+import { getCollection, render } from "astro:content";
+import SiteFooter from "../../components/site/SiteFooter.astro";
+import TopNav from "../../components/site/TopNav.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("projects");
+  return entries.map((entry) => ({
+    params: { slug: entry.id.replace(/\.(md|mdx)$/i, "") }
+  }));
+}
+
+const entries = await getCollection("projects");
+const entry = entries.find((item) => item.id.replace(/\.(md|mdx)$/i, "") === Astro.params.slug);
+
+if (!entry) {
+  throw new Error("Project entry not found");
+}
+
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={`Hovirix | ${entry.data.title}`} description={entry.data.description}>
+  <TopNav currentPath="/projects" />
+
+  <main class="shell min-h-screen w-full flex-grow py-16 pt-28 pb-24">
+    <header class="mb-12 max-w-5xl border-b border-outline-variant/20 pb-8">
+      <p class="mb-3 font-mono text-[10px] uppercase tracking-[0.16em] text-primary">{entry.data.category}</p>
+      <h1 class="mb-4 text-4xl font-bold tracking-[-0.02em] text-on-surface md:text-6xl">{entry.data.title}</h1>
+      <p class="mb-3 max-w-3xl text-lg leading-relaxed text-on-surface-variant">{entry.data.description}</p>
+      <div class="flex flex-wrap items-center gap-3">
+        <p class="font-mono text-xs text-on-surface-variant">{entry.data.pubdate}</p>
+        {entry.data.tags.map((tag) => (
+          <span class="bg-surface-container-highest px-2 py-0.5 font-mono text-[10px] uppercase text-on-surface-variant">{tag}</span>
+        ))}
+      </div>
+    </header>
+
+    <article
+      class="max-w-3xl text-on-surface-variant
+        [&_p]:mb-4 [&_p]:leading-relaxed
+        [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-on-surface
+        [&_h3]:mt-6 [&_h3]:mb-2 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-on-surface
+        [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-5
+        [&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:pl-5
+        [&_li]:mb-1"
+    >
+      <Content />
+    </article>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

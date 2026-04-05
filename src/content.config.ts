@@ -1,39 +1,34 @@
 import { defineCollection } from "astro:content";
-import { file, glob } from "astro/loaders";
-import { z } from "zod";
-import { BLOG_CATEGORIES } from "./lib/content";
-
-const blog = defineCollection({
-	loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
-	schema: z.object({
-		draft: z.boolean().default(false),
-		featured: z.boolean().default(false),
-		title: z.string(),
-		description: z.string(),
-		image: z.object({
-			src: z.string(),
-			alt: z.string(),
-		}),
-		pubDate: z.coerce.date(),
-		category: z.enum(BLOG_CATEGORIES),
-		tags: z.array(z.string()),
-	}),
-});
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const projects = defineCollection({
-	loader: file("./src/content/projects.json"),
-	schema: z.object({
-		id: z.string(),
-		draft: z.boolean().default(false),
-		featured: z.boolean().default(false),
-		title: z.string(),
-		description: z.string(),
-		tags: z.array(z.string()),
-		category: z.string(),
-		image: z.url(),
-		href: z.string(),
-		year: z.coerce.number().int(),
-	}),
+  loader: glob({ base: "./src/content/projects", pattern: "**/*.{md,mdx}" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    category: z.enum(["INFRASTRUCTURE", "NETWORKING", "TOOLS"]),
+    pubdate: z.string(),
+    url: z.string().optional(),
+    tags: z.array(z.string()),
+    featured: z.boolean().default(false),
+    image: z.url(),
+    imageAlt: z.string(),
+    icon: z.string()
+  })
 });
 
-export const collections = { blog, projects };
+const research = defineCollection({
+  loader: glob({ base: "./src/content/research", pattern: "**/*.{md,mdx}" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    category: z.enum(["VULNERABILITY RESEARCH", "SYSTEMS", "CRYPTOGRAPHY", "NETWORK"]),
+    pubdate: z.string()
+  })
+});
+
+export const collections = {
+  projects,
+  research
+};

@@ -1,0 +1,43 @@
+---
+import { navigation } from "../../data/navigation";
+
+interface Props {
+  currentPath?: string;
+  variant?: "desktop" | "mobile";
+}
+
+const { currentPath = "/", variant = "desktop" } = Astro.props;
+---
+
+{
+  navigation.map((item) => {
+    const active = item.href === currentPath;
+
+    if (variant === "mobile") {
+      return (
+        <a
+          href={item.href}
+          class={`block px-1 py-2 font-headline text-sm font-medium uppercase tracking-[0.1em] transition-colors ${
+            active ? "text-primary" : "text-on-surface-variant hover:text-on-surface"
+          }`}
+          data-mobile-nav-link
+        >
+          {item.label}
+        </a>
+      );
+    }
+
+    return (
+      <a
+        href={item.href}
+        class={`relative font-headline text-[13px] font-medium leading-none uppercase tracking-[0.08em] transition-colors duration-200 ${
+          active
+            ? "text-primary after:absolute after:-bottom-[25px] after:left-0 after:h-[2px] after:w-full after:bg-primary"
+            : "text-on-surface-variant hover:text-on-surface"
+        }`}
+      >
+        {item.label}
+      </a>
+    );
+  })
+}

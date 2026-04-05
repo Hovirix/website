@@ -1,0 +1,29 @@
+---
+import SiteFooter from "../components/site/SiteFooter.astro";
+import TopNav from "../components/site/TopNav.astro";
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  currentPath?: string;
+  mainClass?: string;
+}
+
+const {
+  title = "Hovirix | Research",
+  description = "Technical analyses, system investigations, and security-focused writeups.",
+  currentPath = Astro.url.pathname,
+  mainClass = "min-h-screen w-full flex-grow py-16 pt-28"
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <TopNav currentPath={currentPath} />
+
+  <main class={`shell ${mainClass}`}>
+    <slot />
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import { getCollection, render } from "astro:content";
+import ResearchLayout from "../../layouts/ResearchLayout.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("research");
+  return entries.map((entry) => ({
+    params: { slug: entry.id.replace(/\.(md|mdx)$/i, "") }
+  }));
+}
+
+const entries = await getCollection("research");
+const entry = entries.find((item) => item.id.replace(/\.(md|mdx)$/i, "") === Astro.params.slug);
+
+if (!entry) {
+  throw new Error("Research entry not found");
+}
+
+const { Content } = await render(entry);
+---
+
+<ResearchLayout title={`Hovirix | ${entry.data.title}`} description={entry.data.description} mainClass="min-h-screen w-full flex-grow py-16 pt-28 pb-24">
+  <header class="mb-12 max-w-4xl border-b border-outline-variant/20 pb-8">
+    <p class="mb-3 font-mono text-[10px] uppercase tracking-[0.16em] text-primary">{entry.data.category}</p>
+    <h1 class="mb-4 text-4xl font-bold tracking-[-0.02em] text-on-surface md:text-6xl">{entry.data.title}</h1>
+    <p class="mb-3 text-lg leading-relaxed text-on-surface-variant">{entry.data.description}</p>
+    <p class="font-mono text-xs text-on-surface-variant">{entry.data.pubdate}</p>
+  </header>
+
+  <article
+    class="max-w-3xl text-on-surface-variant
+      [&_p]:mb-4 [&_p]:leading-relaxed
+      [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-on-surface
+      [&_h3]:mt-6 [&_h3]:mb-2 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-on-surface
+      [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-5
+      [&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:pl-5
+      [&_li]:mb-1"
+  >
+    <Content />
+  </article>
+</ResearchLayout>

@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import FeaturedProject from "../components/sections/projects/FeaturedProject.astro";
+import ProjectsFilterBar from "../components/sections/projects/ProjectsFilterBar.astro";
+import ProjectsGridDense from "../components/sections/projects/ProjectsGridDense.astro";
+import ProjectsPageHero from "../components/sections/projects/ProjectsPageHero.astro";
+import SiteFooter from "../components/site/SiteFooter.astro";
+import TopNav from "../components/site/TopNav.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pageTitle = "Hovirix | Projects";
+const pageDescription = "Security engineering projects, infrastructure designs, and research implementations.";
+const heroTitle = pageTitle.replace("Hovirix | ", "").toUpperCase();
+
+const projects = await getCollection("projects");
+projects.sort((a, b) => new Date(b.data.pubdate).getTime() - new Date(a.data.pubdate).getTime());
+const featuredProject = projects.find((project) => project.data.featured) ?? projects[0];
+const gridProjects = projects.filter((project) => project.id !== featuredProject?.id);
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+>
+  <TopNav currentPath={Astro.url.pathname} />
+
+  <main class="shell min-h-screen w-full flex-grow py-16 pt-28">
+    <ProjectsPageHero title={heroTitle} description={pageDescription} />
+    {featuredProject && <FeaturedProject project={featuredProject} />}
+    <ProjectsFilterBar total={projects.length} />
+    <ProjectsGridDense items={gridProjects} />
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

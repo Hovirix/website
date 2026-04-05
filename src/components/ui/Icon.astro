@@ -1,0 +1,14 @@
+---
+interface Props {
+  name: string;
+  fill?: boolean;
+  class?: string;
+}
+
+const { name, fill = false, class: className = "" } = Astro.props;
+const fillSettings = fill ? "'FILL' 1" : "'FILL' 0";
+---
+
+<span class={`material-symbols-outlined ${className}`} style={`font-variation-settings: ${fillSettings}, 'wght' 400, 'GRAD' 0, 'opsz' 24;`}>
+  {name}
+</span>

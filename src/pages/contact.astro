@@ -1,32 +1,76 @@
 ---
-import ContactForm from "../components/ContactForm.tsx";
-import ContactSidebar from "@/components/ContactSidebar.astro";
-import PageHeader from "@/components/PageHeader.astro";
-import PageShell from "@/components/PageShell.astro";
-import Layout from "../layouts/Layout.astro";
+import SiteFooter from "../components/site/SiteFooter.astro";
+import TopNav from "../components/site/TopNav.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pageTitle = "Hovirix | Contact";
+const pageDescription = "Open to opportunities, collaborations, and technical inquiries. Secure communication available upon request.";
+const heroTitle = pageTitle.replace("Hovirix | ", "").toUpperCase();
 ---
 
-<Layout title="Contact">
-  <PageShell path="sys://hovirix.dev/contact">
-    <span slot="meta" class="font-mono text-[11px] text-muted-foreground">
-      Open to work
-      <span class="ml-2 inline-block h-1.5 w-1.5 rounded-full bg-primary align-middle" />
-    </span>
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+>
+  <TopNav currentPath={Astro.url.pathname} />
 
-    <PageHeader title="Let's Talk" />
-
-    <div class="animate-fade-up border-b px-8 pb-10">
-      <p class="max-w-sm text-sm leading-[1.9] text-muted-foreground">
-        Have a project in mind or just want to say hello?<br />
-        I'll get back to you within a day or two.
+  <main class="shell min-h-[calc(100vh-4rem)] w-full flex-grow py-16 pt-28 pb-28">
+    <header class="mb-25">
+      <h1 class="mb-4 text-5xl font-bold tracking-[-0.03em] md:text-7xl">{heroTitle}</h1>
+      <p class="max-w-6xl border-l-2 border-primary pl-6 text-lg leading-relaxed text-on-surface-variant">
+        {pageDescription}
       </p>
-    </div>
+    </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto]">
-      <div class="animate-fade-up delay-200 border-b px-8 py-12 md:border-b-0 md:border-r md:py-16">
-        <ContactForm client:visible />
-      </div>
-      <ContactSidebar />
-    </div>
-  </PageShell>
-</Layout>
+    <section class="max-w-3xl space-y-12 text-on-surface">
+        <div class="border-b border-outline-variant/20 pb-8">
+        <h2 class="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-on-surface-variant">MATRIX</h2>
+        <a
+          href="https://matrix.to/#/@hovirix:matrix.org"
+          target="_blank"
+          rel="noreferrer"
+          class="mb-2 inline-block text-xl text-on-surface transition-colors hover:text-primary"
+        >
+          @hovirix:matrix.org
+        </a>
+        <p class="text-base leading-relaxed text-on-surface-variant">Preferred for direct communication.</p>
+        </div>
+
+        <div class="border-b border-outline-variant/20 pb-8">
+          <h2 class="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-on-surface-variant">PGP / EMAIL</h2>
+          <a href="mailto:contact@hovirix.dev" class="inline-block text-xl text-on-surface transition-colors hover:text-primary">
+            contact@hovirix.dev
+          </a>
+          <p class="mt-2 font-mono text-xs tracking-[0.04em] text-on-surface-variant">Fingerprint: A1C9 7E4F 12D8 B53A 8C22 91F7 4D19 8C6B E0A2 F9D4</p>
+          <a
+            href="/pgp/hovirix-public-key.asc"
+            class="mt-4 inline-block font-mono text-xs uppercase tracking-[0.14em] text-primary transition-colors hover:text-primary-fixed"
+          >
+            Download public key ->
+          </a>
+        </div>
+
+        <div class="border-b border-outline-variant/20 pb-8">
+          <h2 class="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-on-surface-variant">GITHUB</h2>
+          <a
+            href="https://github.com/hovirix"
+            target="_blank"
+            rel="noreferrer"
+            class="inline-block text-xl text-on-surface transition-colors hover:text-primary"
+          >
+            github.com/hovirix
+          </a>
+        </div>
+
+        <div class="pb-4">
+          <h2 class="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-on-surface-variant">SECURITY & PRIVACY</h2>
+          <ul class="space-y-2 text-base leading-relaxed text-on-surface-variant">
+            <li>No tracking or analytics are deployed on communication endpoints.</li>
+            <li>PGP-encrypted communication is preferred for sensitive disclosures.</li>
+          </ul>
+        </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
