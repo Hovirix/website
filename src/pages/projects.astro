@@ -31,7 +31,9 @@ const gridProjects = projects.filter(
   <main class="shell min-h-screen w-full flex-grow py-16 pt-28">
     <ProjectsPageHero title={heroTitle} description={pageDescription} />
     {featuredProject && <FeaturedProject project={featuredProject} />}
-    <ProjectsFilterBar total={projects.length} />
+    <div id="projects-list">
+      <ProjectsFilterBar total={projects.length} />
+    </div>
     <ProjectsGridDense items={gridProjects} />
   </main>
 
