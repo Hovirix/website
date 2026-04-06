@@ -8,13 +8,13 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<section>
+<section class="research-list">
   {
     items.map((item) => {
       const researchSlug = item.id.replace(/\.(md|mdx)$/i, "");
       return (
         <article
-          class="border-b border-outline-variant/10"
+          class="research-card border-b border-outline-variant/10"
           data-research-item
           data-category={item.data.category.toLowerCase().replace(/\s+/g, "-")}
         >

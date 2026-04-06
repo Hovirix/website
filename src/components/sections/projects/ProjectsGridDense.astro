@@ -10,14 +10,14 @@ const { items } = Astro.props;
 ---
 
 <div
-  class="grid grid-cols-1 border border-outline-variant/20 bg-outline-variant/20 md:grid-cols-2"
+  class="project-grid grid grid-cols-1 border border-outline-variant/20 bg-outline-variant/20 md:grid-cols-2"
 >
   {
     items.map((item) => {
       const projectSlug = item.id.replace(/\.(md|mdx)$/i, "");
       return (
         <article
-          class="group bg-[#151516] p-8 transition-colors hover:bg-surface-container-high"
+          class="project-card group bg-[#151516] p-8 transition-all duration-500 hover:-translate-y-0.5 hover:bg-surface-container-high hover:shadow-[0_14px_36px_rgba(0,0,0,0.3)]"
           data-project-item
           data-category={item.data.category.toLowerCase()}
         >
