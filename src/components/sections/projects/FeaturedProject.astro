@@ -54,7 +54,7 @@ const projectHref = project.data.url ?? `/projects/${projectSlug}`;
           class="px-8 py-3 text-sm tracking-[0.14em]">View Project</Button
         >
         <Button
-          href="/projects"
+          href="/projects#projects-list"
           variant="ghost"
           class="border-outline px-8 py-3 text-sm text-on-surface hover:bg-surface-container-high"
         >
@@ -67,7 +67,7 @@ const projectHref = project.data.url ?? `/projects/${projectSlug}`;
     >
       <img
         src={project.data.image}
-        alt={project.data.imageAlt}
+        alt={project.data.title}
         class="h-full w-full object-cover opacity-50 grayscale contrast-125"
         loading="lazy"
       />

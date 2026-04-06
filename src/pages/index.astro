@@ -1,5 +1,6 @@
 ---
 import ContactSection from "../components/sections/ContactSection.astro";
+import FeaturedProject from "../components/sections/projects/FeaturedProject.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import ProjectsGridDense from "../components/sections/projects/ProjectsGridDense.astro";
 import ResearchList from "../components/sections/research/ResearchList.astro";
@@ -25,6 +26,16 @@ research.sort(
     new Date(b.data.pubdate).getTime() - new Date(a.data.pubdate).getTime(),
 );
 const homepageProjects = projects.slice(0, 4);
+const orderedHomepageProjects = projects
+  .filter((project) => project.data.homepageOrder !== undefined)
+  .sort((a, b) => (a.data.homepageOrder ?? 999) - (b.data.homepageOrder ?? 999));
+const homepageFeaturedProject =
+  orderedHomepageProjects.find((project) => project.data.homepageOrder === 1) ??
+  projects.find((project) => project.data.featured) ??
+  projects[0];
+const homepageSecondaryProjects = orderedHomepageProjects
+  .filter((project) => project.id !== homepageFeaturedProject?.id)
+  .slice(0, 2);
 const homepageResearch = research.slice(0, 3);
 ---
 
@@ -44,7 +55,16 @@ const homepageResearch = research.slice(0, 3);
           View all ->
         </a>
       </div>
-      <ProjectsGridDense items={homepageProjects} />
+      {homepageFeaturedProject && (
+        <FeaturedProject project={homepageFeaturedProject} />
+      )}
+      <ProjectsGridDense
+        items={
+          homepageSecondaryProjects.length > 0
+            ? homepageSecondaryProjects
+            : homepageProjects.slice(1, 3)
+        }
+      />
     </section>
 
     <section class="mb-24">
