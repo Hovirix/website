@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TopNav from "../components/site/TopNav.astro";
+import SiteFooter from "../components/site/SiteFooter.astro";
+import CopyButton from "../components/ui/CopyButton.astro";
+import { PGP_FINGERPRINT, PGP_PUBLIC_KEY } from "../data/pgp";
+
+const pageTitle = "Hovirix | PGP Key";
+const pageDescription = "PGP public key for secure communication.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <TopNav currentPath={Astro.url.pathname} />
+
+  <main class="relative shell min-h-[calc(100vh-4rem)] w-full flex-grow py-16 pt-28 pb-28">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-x-0 top-14 -z-10 h-72 bg-[radial-gradient(circle_at_12%_22%,rgb(0_82_255_/_22%)_0%,transparent_55%),radial-gradient(circle_at_86%_10%,rgb(114_255_229_/_10%)_0%,transparent_50%)]"
+    ></div>
+
+    <header class="mb-10 max-w-5xl">
+      <h1 class="mb-4 text-5xl font-bold tracking-[-0.03em] md:text-7xl">PGP KEY</h1>
+      <p class="max-w-5xl border-l-2 border-primary pl-6 text-lg leading-relaxed text-on-surface-variant">
+        {pageDescription}
+      </p>
+      <div class="mt-5 border border-outline-variant/35 bg-surface-container-low/70 p-4">
+        <p class="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-on-surface-variant">
+          Fingerprint
+        </p>
+        <p class="font-mono text-xs leading-relaxed tracking-[0.08em] text-on-surface">
+          {PGP_FINGERPRINT}
+        </p>
+      </div>
+    </header>
+
+    <section class="max-w-5xl border border-outline-variant/50 bg-surface-container-lowest/95 shadow-[0_28px_58px_rgb(0_0_0_/_42%),inset_0_0_0_1px_rgb(255_255_255_/_3%)] motion-safe:animate-[project-card-rise_580ms_cubic-bezier(0.22,1,0.36,1)_210ms_both] motion-reduce:animate-none">
+      <div class="flex items-center gap-2 border-b border-outline-variant/40 bg-[linear-gradient(180deg,rgb(37_37_39_/_85%)_0%,rgb(28_27_28_/_75%)_100%)] px-4 py-2.5">
+        <span class="inline-block h-[9px] w-[9px] rounded-full bg-[rgb(255_95_86_/_90%)]"></span>
+        <span class="inline-block h-[9px] w-[9px] rounded-full bg-[rgb(255_190_46_/_90%)]"></span>
+        <span class="inline-block h-[9px] w-[9px] rounded-full bg-[rgb(40_201_64_/_90%)]"></span>
+        <p class="ml-2 font-mono text-[11px] uppercase tracking-[0.1em] text-on-surface-variant/80">hovirix.asc</p>
+        <div class="ml-auto">
+          <CopyButton text={PGP_PUBLIC_KEY} label="Copy key" />
+        </div>
+      </div>
+      <pre class="overflow-x-auto p-4 font-mono text-xs leading-[1.55] text-primary-fixed/95 md:p-[1.1rem]">{PGP_PUBLIC_KEY}</pre>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

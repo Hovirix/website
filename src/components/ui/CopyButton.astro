@@ -1,0 +1,46 @@
+---
+interface Props {
+  text: string;
+  label?: string;
+}
+
+const { text, label = "Copy" } = Astro.props;
+const buttonId = `copy-${Math.random().toString(36).slice(2, 10)}`;
+const statusId = `${buttonId}-status`;
+---
+
+<div class="inline-flex items-center gap-3">
+  <button
+    id={buttonId}
+    data-copy-text={text}
+    class="inline-block rounded bg-primary px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-on-primary transition-colors hover:bg-primary-fixed"
+    type="button"
+  >
+    {label}
+  </button>
+  <span id={statusId} class="font-mono text-[11px] uppercase tracking-[0.1em] text-on-surface-variant"></span>
+</div>
+
+<script define:vars={{ buttonId, statusId }}>
+  const button = document.getElementById(buttonId);
+  const status = document.getElementById(statusId);
+
+  if (button && status) {
+    button.addEventListener("click", async () => {
+      const text = button.getAttribute("data-copy-text") || "";
+
+      try {
+        await navigator.clipboard.writeText(text);
+        status.textContent = "Copied";
+        setTimeout(() => {
+          status.textContent = "";
+        }, 1600);
+      } catch {
+        status.textContent = "Copy failed";
+        setTimeout(() => {
+          status.textContent = "";
+        }, 1600);
+      }
+    });
+  }
+</script>
