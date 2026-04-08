@@ -1,14 +1,14 @@
 ---
-title: "Self-Hosted Security Platform"
-description: "Production-like self-hosted infrastructure for operating critical services and conducting security testing, built on hardened Fedora systems with infrastructure-as-code, isolated container workloads, and segmented, zero-trust networking."
+title: "Self-Hosted DevSecOps Platform"
+description: "The HX Lab is a personal self-hosted infrastructure for operating critical services and conducting security. It is treated like production with different environments for testing and exploring purposes."
 category: "INFRASTRUCTURE"
 pubdate: "2026-04-06"
 url: "https://github.com/hovirix/homelab"
 tags:
   - Self-Hosting
-  - DevSecOps
-  - Security Engineering
-  - Fedora
+  - Privacy
+  - Security
+  - Kubernetes
   - Terraform
   - Ansible
   - Podman
